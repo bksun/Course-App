@@ -1,0 +1,11 @@
+.custom-header ul li a {
+    color: rgb(104, 133, 215) !important;
+}
+
+.custom-header ul li a:active{
+    color: red;
+}
+
+.custom-header {
+    padding: 10px 10px;
+}
