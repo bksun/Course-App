@@ -13,8 +13,8 @@ class Course extends Component {
             <li key={ this.state.course.id } class="list-group-item d-flex ">
                 <button className="btn btn-info">Watch</button>
                 <span >{ this.state.course.title }</span>
-                <span id="author" className="badge badge-warning badge-pill">{ this.state.course.authorId }</span>
-                <span id="category" className="badge badge-primary badge-pill">{ this.state.course.category }</span>
+                <span id="author" className="author badge badge-warning badge-pill">{ this.state.course.authorId }</span>
+                <span id="category" className="category badge badge-primary badge-pill">{ this.state.course.category }</span>
             </li>
          )
     }

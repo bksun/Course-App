@@ -1,14 +1,27 @@
+
+#course-list li span {
+    margin: 15px 0px;
+}
+
 li span {
     margin: 0px 10px;
 }
 
 li .badge {
-    position: absolute !important;
-    right: 10px !important;
-    padding: 12px !important;
+    position: absolute ;
+    right: 10px ;
+    padding: 12px ;
 }
 
 li #author {
     position: absolute;
-    margin-right: 15%;
+    margin-right: 150px;
+    color: blueviolet;
+    background-color: turquoise;
+}
+
+
+#course-list ul li .author {
+    position: absolute;
+    margin-right: 17%;
 }
