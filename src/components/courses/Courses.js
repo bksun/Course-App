@@ -17,22 +17,23 @@ class Courses extends Component {
     this.props.fetchCourses()
   }
 
+    createCourseSlug(course_name) {
+      return course_name.split(" ").join("-")
+    }
+
     handleCourseSubmit(e) {
       e.preventDefault()
       const course_name = e.target["inputCourse"].value; //e.target.inputCourse.value;
-      // const courses = [...this.props.courses, course_name]
       const course =  {
         id: 100 + this.props.courses.length,
         title: course_name,
-        slug: course_name,
+        slug: this.createCourseSlug(course_name),
         authorId: 1,
         category: 'JavaScript'
       }
       this.props.addOneCourses(course)
-      // this.setState({ courses, currentCourse: "" })
       this.CourseFormRef.current.resetForm()
     }
-
 
     render() { 
         return (
@@ -43,7 +44,6 @@ class Courses extends Component {
          );
     }
 }
-
 
 Courses.propTypes = {
   courses: PropTypes.array.isRequired,

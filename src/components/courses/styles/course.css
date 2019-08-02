@@ -1,0 +1,14 @@
+li span {
+    margin: 0px 10px;
+}
+
+li .badge {
+    position: absolute !important;
+    right: 10px !important;
+    padding: 12px !important;
+}
+
+li #author {
+    position: absolute;
+    margin-right: 15%;
+}

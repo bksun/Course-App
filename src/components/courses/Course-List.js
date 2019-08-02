@@ -12,10 +12,10 @@ class CourseList extends Component {
         return ( 
             <div>
               <h2>Courses</h2>
-              <ul>
+              <ul class="list-group">
                 { this.props.courses.length > 0 &&
                   this.props.courses.map((course, index) => (
-                    <Course key={course.id.toString()} course={ course.title } index = { index } />
+                    <Course key={course.id.toString()} course={ course } index = { index } />
                   ))
                 }
               </ul>
