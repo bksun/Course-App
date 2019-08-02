@@ -10,7 +10,6 @@ class CourseForm extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
-
     handleChange(e) {
         this.setState({
           currentCourse: e.target.value

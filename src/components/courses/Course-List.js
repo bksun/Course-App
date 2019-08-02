@@ -15,7 +15,7 @@ class CourseList extends Component {
               <ul>
                 { this.props.courses.length > 0 &&
                   this.props.courses.map((course, index) => (
-                    <Course key={index.toString()} course={ course } index = { index } />
+                    <Course key={course.id.toString()} course={ course.title } index = { index } />
                   ))
                 }
               </ul>

@@ -1,38 +1,62 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { fetchCourses, addOneCourses } from "../../thunks/courses";
 import CourseList from "./Course-List";
 import CourseForm from "./Course-Form";
 class Courses extends Component {
     constructor(props) {
         super(props);
-
-        this.state = { 
-            courses: [
-              "React", "Redux", "React-router"
-            ],
-            currentCourse: ""
-           }
-        
         this.CourseFormRef = React.createRef()
         this.handleCourseSubmit = this.handleCourseSubmit.bind(this)
     }
 
+
+  componentDidMount(){
+    this.props.fetchCourses()
+  }
+
     handleCourseSubmit(e) {
       e.preventDefault()
       const course_name = e.target["inputCourse"].value; //e.target.inputCourse.value;
-      const courses = [...this.state.courses, course_name]
-      this.setState({ courses, currentCourse: "" })
+      // const courses = [...this.props.courses, course_name]
+      const course =  {
+        id: 100 + this.props.courses.length,
+        title: course_name,
+        slug: course_name,
+        authorId: 1,
+        category: 'JavaScript'
+      }
+      this.props.addOneCourses(course)
+      // this.setState({ courses, currentCourse: "" })
       this.CourseFormRef.current.resetForm()
     }
 
 
     render() { 
-        return ( 
+        return (
             <div>
-              <CourseList courses = {this.state.courses}/>
-              <CourseForm ref={this.CourseFormRef} course={this.state.currentCourse} handleCourseSubmit = { this.handleCourseSubmit} />
+              <CourseList courses = {this.props.courses}/>
+              <CourseForm ref={this.CourseFormRef} course={this.props.currentCourse} handleCourseSubmit = { this.handleCourseSubmit} />
             </div>
          );
     }
 }
- 
-export default Courses;
+
+
+Courses.propTypes = {
+  courses: PropTypes.array.isRequired,
+  currentCourse: PropTypes.any.isRequired,
+  fetchCourses: PropTypes.func.isRequired,
+  addOneCourses: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    courses: state.courses,
+    currentCourse: state.currentCourse
+  }
+}
+
+export default connect(mapStateToProps, { fetchCourses, addOneCourses })(Courses);

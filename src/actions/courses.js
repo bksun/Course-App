@@ -5,18 +5,24 @@ const setCourses = (courses) => ({
     courses
 })
 
+const setOneCourse = (course) => ({
+    type: COURSE.ADD_COURSE,
+    course
+})
+
 const setError = (error) => ({
     type: COURSE.LOAD_FAIL,
     error
 })
 
 const loadCourses = () => ({
-    type: IMAGES.LOAD
+    type: COURSE.LOAD
 })
 
 
 export {
     setCourses,
     setError,
-    loadCourses
+    loadCourses,
+    setOneCourse
 }

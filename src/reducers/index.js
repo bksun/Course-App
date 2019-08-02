@@ -7,7 +7,8 @@ import loadingReducer from "./loading-reducer";
 const rootReducer = combineReducers({
     isLoading: loadingReducer,
     courses: coursesReducer,
-    error: errorReducer
+    error: errorReducer,
+    currentCourse: {}
 })
 
 export default rootReducer;
