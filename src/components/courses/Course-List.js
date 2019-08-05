@@ -13,19 +13,7 @@ class CourseList extends Component {
     
 
     render() { 
-        let titleStyle = {
-          marginLeft: '150px',
-          fontSize: '14px'
-        }
-
-        let headerStyle = {
-          fontWeight: "Bold"
-        }
-
-        let listStyle = {
-          margin: "15px 10px"
-        }
-
+        
         return ( 
             <div id="course-list">
               <h2>Courses</h2>
@@ -33,8 +21,8 @@ class CourseList extends Component {
 
               <ul class="list-group">
               { this.props.courses.length > 0 &&
-                <li style={headerStyle} key="9999999999" class="list-group-item d-flex ">
-                  <span style={titleStyle} >Title</span>
+                <li class="list-group-item d-flex ">
+                  <span>Title</span>
                   <span id="author" className="badge">Author</span>
                   <span id="category" className="badge">Category</span>
                 </li>
@@ -47,7 +35,8 @@ class CourseList extends Component {
               <div>
                 { this.props.courses.length <= 0 && <div className="text-danger">
                   courses not available for now!
-                </div>}
+                </div>
+                }
               </div>
             </div>
          );
