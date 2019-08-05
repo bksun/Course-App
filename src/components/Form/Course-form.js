@@ -20,7 +20,7 @@ class CourseForm extends Component {
     }
     
     componentDidMount(){
-        // this.props.fetchAuthors()
+        this.props.fetchAuthors()
     }
 
     handleChange = (e) => {
@@ -34,20 +34,25 @@ class CourseForm extends Component {
     }
 
     handleCourseSubmit = (e) => {
-        e.preventDefault()
-        alert('handle add course..')
-        const title = e.target["input_title"].value;
-        const authorId = e.target["input_author"].value;
-        const category = e.target["input_category"].value;
-        const course =  {
-          title,
-          authorId,
-          category
+        try {
+            e.preventDefault()
+            alert('handle add course..')
+            const title = e.target["input_title"].value;
+            const authorId = e.target["input_author"].value;
+            const category = e.target["input_category"].value;
+            const course =  {
+            title,
+            authorId,
+            category
+            }
+            console.log(course)
+            
+            saveCourse(course)
+            this.props.history.push('/courses')
         }
-        console.log(course)
-        
-        saveCourse(course)
-        // this.CourseFormRef.current.resetForm()
+        catch(error) {
+            this.props.history.push('/courses')
+        }
     }
 
     resetForm() {
@@ -91,7 +96,7 @@ class CourseForm extends Component {
         return (
             <div id="course-form">
                 <h2>Add Courses</h2>
-                { form }
+                {this.state.done ? <Redirect to="/courses" /> : form }
             </div>
          );
     }
