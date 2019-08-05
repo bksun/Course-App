@@ -28,16 +28,15 @@ class CourseList extends Component {
                 </li>
                   && 
                   this.props.courses.map((course, index) => (
-                    <Course key={course.id.toString()} course={ course } index = { index } />
+                    <Course key={course.id.toString()} course = { course } authors = { this.props.authors } index = { index } />
                   ))
                 }
               </ul>
-              <div>
+              
                 { this.props.courses.length <= 0 && <div className="text-danger">
                   courses not available for now!
                 </div>
                 }
-              </div>
             </div>
          );
     }

@@ -11,7 +11,6 @@ function fetchCourses() {
     }
 }
 
-
 function addOneCourses(course) {
     return (dispatch) => {
         dispatch(setOneCourse(course))

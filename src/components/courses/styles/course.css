@@ -25,3 +25,7 @@ li #author {
     position: absolute;
     margin-right: 17%;
 }
+
+#course-form form {
+    width: 50%;
+}

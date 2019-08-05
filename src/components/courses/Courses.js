@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchCourses, addOneCourses } from "../../thunks/courses";
+import { fetchAuthors } from "../../thunks/authors";
 import CourseList from "./Course-List";
-import CourseForm from "./Course-Form";
 
 class Courses extends Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class Courses extends Component {
 
   componentDidMount(){
     this.props.fetchCourses()
+    this.props.fetchAuthors()
   }
 
     createCourseSlug(course_name) {
@@ -39,8 +40,8 @@ class Courses extends Component {
     render() { 
         return (
             <div>
-              <CourseList courses = {this.props.courses}/>
-              <CourseForm ref={this.CourseFormRef} course={this.props.currentCourse} handleCourseSubmit = { this.handleCourseSubmit} />
+              <CourseList courses = {this.props.courses} authors = {this.props.authors}/>
+              {/* <CourseForm ref={this.CourseFormRef} course={this.props.courses[0]} handleCourseSubmit = { this.handleCourseSubmit} /> */}
             </div>
          );
     }
@@ -50,14 +51,16 @@ Courses.propTypes = {
   courses: PropTypes.array.isRequired,
   currentCourse: PropTypes.any.isRequired,
   fetchCourses: PropTypes.func.isRequired,
+  fetchAuthors: PropTypes.func.isRequired,
   addOneCourses: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
     courses: state.courses,
+    authors: state.authors,
     currentCourse: state.currentCourse
   }
 }
 
-export default connect(mapStateToProps, { fetchCourses, addOneCourses })(Courses);
+export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors })(Courses);

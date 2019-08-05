@@ -1,4 +1,10 @@
-import { COURSE } from "../constants";
+import { COURSE, AUTHOR } from "../constants";
+
+const setAuthors = (authors) => ({
+    type: AUTHOR.LOAD_SUCCESS,
+    authors
+})
+
 
 const setCourses = (courses) => ({
     type: COURSE.LOAD_SUCCESS,
@@ -24,5 +30,6 @@ export {
     setCourses,
     setError,
     loadCourses,
-    setOneCourse
+    setOneCourse,
+    setAuthors
 }
