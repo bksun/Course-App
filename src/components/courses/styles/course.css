@@ -1,3 +1,6 @@
+#course-form form {
+    width: 50%;
+}
 
 #course-list li span {
     margin: 15px 0px;
@@ -16,8 +19,6 @@ li .badge {
 li #author {
     position: absolute;
     margin-right: 150px;
-    color: blueviolet;
-    background-color: turquoise;
 }
 
 
@@ -26,6 +27,9 @@ li #author {
     margin-right: 17%;
 }
 
-#course-form form {
-    width: 50%;
+#course-list ul .title-header {
+    margin-left: 13%;
+    border-radius: 5px;
+    color: black;
+    background: yellowgreen;
 }

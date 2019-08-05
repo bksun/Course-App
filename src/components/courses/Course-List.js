@@ -13,30 +13,34 @@ class CourseList extends Component {
     
 
     render() { 
-        
-        return ( 
+        const courseError = 
+          <div className="text-danger">
+            courses not available for now!
+          </div>
+          
+        const courseList = 
+          <ul class="list-group">
+            <li class="list-group-item d-flex ">
+              <button className="title-header btn">Title</button>
+              <span id="author" class="author badge badge-warning badge-pill">Author</span>
+              <span id="category" class="category badge badge-primary badge-pill">Category</span>
+            </li>
+
+            {  this.props.courses.map((course, index) => (
+                <Course key={course.id.toString()} course = { course } authors = { this.props.authors } index = { index } />
+              ))
+            }
+
+          </ul>
+
+          return ( 
             <div id="course-list">
               <h2>Courses</h2>
               <AddCourseButton />
 
-              <ul class="list-group">
-              { this.props.courses.length > 0 &&
-                <li class="list-group-item d-flex ">
-                  <span>Title</span>
-                  <span id="author" className="badge">Author</span>
-                  <span id="category" className="badge">Category</span>
-                </li>
-                  && 
-                  this.props.courses.map((course, index) => (
-                    <Course key={course.id.toString()} course = { course } authors = { this.props.authors } index = { index } />
-                  ))
-                }
-              </ul>
+              { this.props.courses.length <= 0 ? courseError : courseList }
               
-                { this.props.courses.length <= 0 && <div className="text-danger">
-                  courses not available for now!
-                </div>
-                }
+                
             </div>
          );
     }
