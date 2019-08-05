@@ -12,6 +12,10 @@ function fetchCourses() {
 }
 
 function addOneCourses(course) {
+    
+    alert('add course thunk called')
+    console.log(course)
+
     return (dispatch) => {
         dispatch(setOneCourse(course))
     }

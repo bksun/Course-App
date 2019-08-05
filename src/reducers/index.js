@@ -10,7 +10,11 @@ const rootReducer = combineReducers({
     courses: coursesReducer,
     authors: authorsReducer,
     error: errorReducer,
-    currentCourse: {}
+    currentCourse: {
+        input_title: "",
+        input_author: "",
+        input_category: ""
+    }
 })
 
 export default rootReducer;

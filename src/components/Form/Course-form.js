@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { getCourses, saveCourse, deleteCourse } from "../../api/courseApi";
 import { fetchCourses, addOneCourses } from "../../thunks/courses";
 import { fetchAuthors } from "../../thunks/authors";
 
@@ -11,44 +12,79 @@ class CourseForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // input_title: this.props.course["title"],
-            // input_author: this.props.course.author,
-            // input_category: this.props.course.category
+            input_title: this.props.currentCourse ? this.props.currentCourse.input_title : "",
+            input_author: this.props.currentCourse ? this.props.currentCourse.input_author : "",
+            input_category: this.props.currentCourse ? this.props.currentCourse.input_category.value : "",
+            done: false
         }
-        this.handleChange = this.handleChange.bind(this)
     }
+    
     componentDidMount(){
-        this.props.fetchAuthors()
+        // this.props.fetchAuthors()
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
-            input_title: e.target.value,
-            input_author: e.target["inputAuthor"].value,
-            input_category: e.target["inputCategory"].value
+            [e.target.name]: e.target.value
         })
+    }
+    
+    createCourseSlug(course_name) {
+        return course_name.split(" ").join("-")
+    }
+
+    handleCourseSubmit = (e) => {
+        e.preventDefault()
+        alert('handle add course..')
+        const title = e.target["input_title"].value;
+        const authorId = e.target["input_author"].value;
+        const category = e.target["input_category"].value;
+        const course =  {
+          title,
+          authorId,
+          category
+        }
+        console.log(course)
+        
+        saveCourse(course)
+        // this.CourseFormRef.current.resetForm()
     }
 
     resetForm() {
         this.setState({
-            inputTitle: "",
-            inputAuthor: "",
-            inputCategory: ""
-          })
+                input_title: "",
+                input_author: "",
+                input_category: ""
+            }
+          )
     }
 
     render() {
         const form = 
-        <form onSubmit = { this.props.handleCourseSubmit } id="course-form">
-            {/* <div className="form-group mx-sm-3 mb-2">
-                <input type="text" onChange={this.handleChange} className="form-control" name="inputTitle"  id="inputTitle" value={this.state.current_course.inputTitle} placeholder="Enter Title" required/>
-            </div>
+        <form onSubmit = { this.handleCourseSubmit } id="course-form">
             <div className="form-group mx-sm-3 mb-2">
-                <input type="text" onChange={this.handleChange} className="form-control" name="inputAuthor"  id="inputAuthor" value={this.state.current_course.inputAuthor} placeholder="Enter Author" required/>
+                <label for="input_title">Title</label>
+                <input type="text" onChange={this.handleChange} className="form-control" name="input_title"  id="input_title" value={this.state.input_title} placeholder="Enter Title" required/>
             </div>
+
             <div className="form-group mx-sm-3 mb-2">
-                <input type="text" onChange={this.handleChange} className="form-control" name="inputCategory"  id="inputCategory" value={this.state.current_course.inputCategory} placeholder="Enter Category" required/>
-            </div> */}
+                <label for="input_author">Author</label>
+                <select class="form-control" id="input_author">
+                    {
+                        this.props.authors.map( author => {
+                        return (
+                            <option value={author.id}>{author.name}</option> 
+                        )
+                        })
+                    }
+                </select>
+            </div>
+
+            <div className="form-group mx-sm-3 mb-2">
+                <label for="input_category">Category</label>
+                <input type="text" onChange={this.handleChange} className="form-control" name="input_category"  id="input_category" value={this.state.input_category} placeholder="Enter Category" required/>
+            </div>
+            
             <button type="submit" className="btn btn-primary mb-2">Save</button>
         </form>
 
@@ -63,13 +99,19 @@ class CourseForm extends Component {
 
 
 function mapStateToProps(state, props) {
-    if (props.match.params._id != "undefined") {
-        return {
-            course: state.courses.find(item => item._id === props.match.params._id)
-        }
-    }
+    // if (props.match.params._id != "undefined") {
+    //     return {
+    //         authors: state.authors,
+    //         currentCourse: state.courses.find(item => item._id === props.match.params._id),
+    //         text: {}
+    //     }
+    // }
 
-    return { course: null };
+    return { 
+        currentCourse: state.currentCourse,
+        authors: state.authors,
+        courses: state.courses
+    }
 }
 
-export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors })(CourseForm);
+export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors, saveCourse })(CourseForm);
