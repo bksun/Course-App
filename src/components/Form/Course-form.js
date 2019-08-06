@@ -40,18 +40,20 @@ class CourseForm extends Component {
                 const authorId = e.target["authorId"].value;
                 const category = e.target["category"].value;
 
-                if (this.props.currentCourse.id) {
+                if (this.props.currentCourse && this.props.currentCourse.id) {
                     this.props.currentCourse.title = title;
                     this.props.currentCourse.category = category;
                     this.props.currentCourse.authorId = authorId;
                     saveCourse(this.props.currentCourse)
                 } else {
+                    alert('Add course')
                     const course =  {
                         title,
                         authorId,
                         category
                     }
-                    saveCourse(course)
+                    console.log(course)
+                    this.props.addOneCourses(course)
                 }
                 
             this.props.history.push('/courses')
