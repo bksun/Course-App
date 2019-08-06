@@ -5,6 +5,10 @@
 #course-list li span {
     margin: 15px 0px;
 }
+#course-list li a {
+    margin: 15px auto;
+    text-align: center;
+}
 
 li span {
     margin: 0px 10px;

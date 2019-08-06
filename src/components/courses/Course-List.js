@@ -10,14 +10,12 @@ class CourseList extends Component {
         this.state = {}
     }
 
-    
-
     render() { 
         const courseError = 
           <div className="text-danger">
             courses not available for now!
           </div>
-          
+
         const courseList = 
           <ul class="list-group">
             <li class="list-group-item d-flex ">
@@ -30,7 +28,6 @@ class CourseList extends Component {
                 <Course key={course.id.toString()} course = { course } authors = { this.props.authors } index = { index } />
               ))
             }
-
           </ul>
 
           return ( 

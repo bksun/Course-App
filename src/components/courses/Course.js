@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
 import "./styles/course.css";
 class Course extends Component {
     constructor(props) {
@@ -22,7 +24,11 @@ class Course extends Component {
         return (
             <li key={ this.state.course.id } class="list-group-item d-flex ">
                 <button className="btn btn-info">Watch</button>
-                <span >{ this.state.course.title }</span>
+                
+                <Link className="item" activeclassname="active" to={`/course/${this.state.course.id}`}>
+                    <span>{ this.state.course.title }</span>
+                </Link>
+
                 <span id="author" className="author badge badge-warning badge-pill">{ this.resolveAuthorNameFromId(this.state.course.authorId) }</span>
                 <span id="category" className="category badge badge-primary badge-pill">{ this.state.course.category }</span>
             </li>

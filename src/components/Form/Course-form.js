@@ -28,7 +28,7 @@ class CourseForm extends Component {
             [e.target.name]: e.target.value
         })
     }
-    
+
     createCourseSlug(course_name) {
         return course_name.split(" ").join("-")
     }
