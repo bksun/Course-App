@@ -6,6 +6,13 @@ const coursesReducer = (state = [], action) => {
     } 
     else if (action.type === COURSE.ADD_COURSE) {
         return [...state, action.course]
+    } 
+    else if (action.type === COURSE.COURSE_DELETE) {
+        return state.filter(item => {
+            if (item.id !== action.courseId) {
+                return item;
+            }
+        });
     }
     return state
 }

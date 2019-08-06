@@ -28,10 +28,8 @@ class Course extends Component {
         return (
             <li key={ this.state.course.id } class="list-group-item d-flex ">
                 <button className="btn btn-info">Watch</button>
-                <button onClick={() => {this.handleDeleteCourse(this.state.course.id)}}  className="btn btn-danger">
-                    {/* <Link className="item" activeclassname="active" to={`/course/${this.state.course.id}`}> */}
+                <button onClick={() => {this.props.delete(this.state.course.id)}}  className="btn btn-danger">
                         <span>Delete</span>
-                    {/* </Link> */}
                 </button>
                 
                 <Link className="item" activeclassname="active" to={`/course/${this.state.course.id}`}>

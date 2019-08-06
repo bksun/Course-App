@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchCourses, addOneCourses } from "../../thunks/courses";
 import { fetchAuthors } from "../../thunks/authors";
+import { fetchCourses, addOneCourses, deleteCourseThunk } from "../../thunks/courses";
 import CourseList from "./Course-List";
+import { store } from "../../App";
 
 class Courses extends Component {
     constructor(props) {
@@ -12,7 +13,6 @@ class Courses extends Component {
         this.CourseFormRef = React.createRef()
         this.handleCourseSubmit = this.handleCourseSubmit.bind(this)
     }
-
 
   componentDidMount(){
     this.props.fetchCourses()
@@ -37,10 +37,18 @@ class Courses extends Component {
       this.CourseFormRef.current.resetForm()
     }
 
+    handleDeleteCourse = (id) => {
+      try {
+        this.props.deleteCourseThunk(id)
+      } catch (error) {
+        this.props.history.push("/courses")
+      }
+    }
+
     render() { 
         return (
             <div>
-              <CourseList courses = {this.props.courses} authors = {this.props.authors}/>
+              <CourseList store={store} courses = {this.props.courses} delete={this.handleDeleteCourse} authors = {this.props.authors}/>
               {/* <CourseForm ref={this.CourseFormRef} course={this.props.courses[0]} handleCourseSubmit = { this.handleCourseSubmit} /> */}
             </div>
          );
@@ -63,4 +71,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors })(Courses);
+export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors, deleteCourseThunk })(Courses);

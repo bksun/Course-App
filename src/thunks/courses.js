@@ -1,5 +1,7 @@
 import { URL } from "../constants";
-import { setCourses, setOneCourse, setError } from "../actions/courses";
+import { setCourses, setOneCourse, setError, deleteOneCourse } from "../actions/courses";
+import { deleteCourse } from "../api/courseApi";
+import { store } from "../App";
 
 function fetchCourses() {
     return dispatch => {
@@ -7,6 +9,7 @@ function fetchCourses() {
         fetch(URL.COURSE_URL)
         .then(res => res.json())
         .then(resCourses => dispatch(setCourses(resCourses)))
+        .then(resCourses => dispatch(deleteOneCourse(8)))
         .catch(error => setError(error.toString()))
     }
 }
@@ -21,4 +24,12 @@ function addOneCourses(course) {
     }
 }
 
-export { fetchCourses, addOneCourses }
+
+function deleteCourseThunk(id) {
+    alert(`thunk ${id}`);
+    deleteCourse(id)
+    store.dispatch(deleteOneCourse(id))
+}
+
+
+export { fetchCourses, addOneCourses, deleteCourseThunk }

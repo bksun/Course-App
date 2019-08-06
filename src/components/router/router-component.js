@@ -8,12 +8,12 @@ import HomeContent from "../home/Home-Content";
 class RouterComponent extends Component {
     render() { 
         return (
-            <Fragment>
-                <Route exact path="/courses" component={Courses} />
-                <Route exact path="/course/:id" component={CourseForm} />
-                <Route exact path="/course" component={CourseForm} />
-                <Route exact path="/about" component={HomeContent} />
-                <Route exact path="/" component={HomeContent} />
+            <Fragment store={this.props.store}>
+                <Route store={this.props.store} exact path="/courses" component={Courses} />
+                <Route store={this.props.store} exact path="/course/:id" component={CourseForm} />
+                <Route store={this.props.store} exact path="/course" component={CourseForm} />
+                <Route store={this.props.store} exact path="/about" component={HomeContent} />
+                <Route store={this.props.store} exact path="/" component={HomeContent} />
             </Fragment>
          );
     }

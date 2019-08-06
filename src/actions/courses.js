@@ -16,6 +16,12 @@ const setOneCourse = (course) => ({
     course
 })
 
+const deleteOneCourse = (courseId) => ({
+    type: COURSE.COURSE_DELETE,
+    courseId
+})
+
+
 const setError = (error) => ({
     type: COURSE.LOAD_FAIL,
     error
@@ -31,5 +37,6 @@ export {
     setError,
     loadCourses,
     setOneCourse,
+    deleteOneCourse,
     setAuthors
 }
