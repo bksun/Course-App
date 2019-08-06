@@ -102,7 +102,7 @@ class CourseForm extends Component {
 
         return (
             <div id="course-form">
-                <h2>Add Courses</h2>
+                { this.props.currentCourse ?  <h2>Edit Course</h2> : <h2>Add Course</h2>}
                 {this.state.done ? <Redirect to="/courses" /> : form }
             </div>
          );
