@@ -10,6 +10,11 @@
     text-align: center;
 }
 
+#course-list li button a {
+   color: white;
+   text-decoration: none;
+}
+
 li span {
     margin: 0px 10px;
 }

@@ -20,10 +20,19 @@ class Course extends Component {
         return authorId
     }
 
+    handleDeleteCourse = (id) => {
+        this.props.delete(id)
+    }
+
     render() {
         return (
             <li key={ this.state.course.id } class="list-group-item d-flex ">
                 <button className="btn btn-info">Watch</button>
+                <button onClick={() => {this.handleDeleteCourse(this.state.course.id)}}  className="btn btn-danger">
+                    {/* <Link className="item" activeclassname="active" to={`/course/${this.state.course.id}`}> */}
+                        <span>Delete</span>
+                    {/* </Link> */}
+                </button>
                 
                 <Link className="item" activeclassname="active" to={`/course/${this.state.course.id}`}>
                     <span>{ this.state.course.title }</span>

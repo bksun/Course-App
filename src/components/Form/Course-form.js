@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 
-import { getCourses, saveCourse, deleteCourse } from "../../api/courseApi";
+import { saveCourse } from "../../api/courseApi";
 import { fetchCourses, addOneCourses } from "../../thunks/courses";
 import { fetchAuthors } from "../../thunks/authors";
 

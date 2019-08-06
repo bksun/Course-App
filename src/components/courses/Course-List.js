@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Course from "./Course";
 import AddCourseButton from "./button/Add-Course-Button";
+
+import { deleteCourse } from "../../api/courseApi";
 import "./styles/course.css";
 
 class CourseList extends Component {
@@ -25,7 +27,7 @@ class CourseList extends Component {
             </li>
 
             {  this.props.courses.map((course, index) => (
-                <Course key={course.id.toString()} course = { course } authors = { this.props.authors } index = { index } />
+                <Course key={course.id.toString()} course = { course } delete={deleteCourse} authors = { this.props.authors } index = { index } />
               ))
             }
           </ul>
