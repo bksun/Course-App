@@ -1,20 +1,27 @@
 import { COURSE, AUTHOR } from "../constants";
 
-const setAuthors = (authors) => ({
-    type: AUTHOR.LOAD_SUCCESS,
-    authors
-})
-
-
 const setCourses = (courses) => ({
     type: COURSE.LOAD_SUCCESS,
     courses
 })
 
-const setOneCourse = (course) => ({
+const setOneCourse = (course) => {
+    alert('set one course action')
+    console.log("course-action: ", course)
+    return {
     type: COURSE.ADD_COURSE,
     course
-})
+ }
+}
+
+const setOneCourseUtil = (course) => {
+    alert('Course Util set one course action')
+    console.log("course-action: ", course)
+    return {
+    type: COURSE.ADD_COURSE_UTIL,
+    course
+ }
+}
 
 const deleteOneCourse = (courseId) => ({
     type: COURSE.COURSE_DELETE,
@@ -30,6 +37,15 @@ const loadCourses = () => ({
     type: COURSE.LOAD
 })
 
+const setAuthors = (authors) => ({
+    type: AUTHOR.LOAD_SUCCESS,
+    authors
+})
+
+const loadAuthors = () => ({
+    type: AUTHOR.LOAD
+})
+
 
 export {
     setCourses,
@@ -37,5 +53,7 @@ export {
     loadCourses,
     setOneCourse,
     deleteOneCourse,
-    setAuthors
+    setAuthors,
+    loadAuthors,
+    setOneCourseUtil
 }

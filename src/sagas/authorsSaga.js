@@ -1,16 +1,18 @@
 import { URL, AUTHOR } from "../constants";
 import { setError, setAuthors } from "../actions/courses";
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, call } from "redux-saga/effects";
+import { getAuthors } from "../api/authorApi";
 
 
 function* watchAuthorsLoad() {
-    yield takeEvery(AUTHOR.LOAD_SUCCESS, fetchAuthors)
+    yield takeEvery(AUTHOR.LOAD, handleFetchAuthors)
 }
 
-function* fetchAuthors() {
-    let courses = yield fetch(URL.AUTHOR_URL)
-    courses = courses.json()
-    yield put(setAuthors(courses))
+
+function* handleFetchAuthors() {
+    const resAuthors = yield call(getAuthors)
+    console.log('response authors:', resAuthors)
+    yield put(setAuthors(resAuthors))
 }
 
 export default watchAuthorsLoad;

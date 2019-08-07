@@ -10,7 +10,8 @@ import { resolve } from "q";
 function* watchCoursesLoad() {
     yield takeEvery(COURSE.LOAD, handleFetchCourses)
     yield takeEvery(COURSE.LOAD_SUCCESS, getCourses)
-    yield takeEvery(COURSE.ADD_COURSE, addOneCourses)
+    // yield takeEvery(COURSE.ADD_COURSE, addOneCourses)
+    yield takeEvery(COURSE.ADD_COURSE_UTIL, addOneCoursesUtil)
     yield takeEvery(COURSE.COURSE_DELETE, deleteCourseSaga)
 }
 
@@ -20,9 +21,22 @@ function* handleFetchCourses() {
     yield put(setCourses(resCourses))
 }
 
-function* addOneCourses(course) {
-    yield call(saveCourse(course))
-    yield put(loadCourses())
+export function* addOneCourses(course) {
+    console.log('course2: ', course)
+    alert('Saga2: add course')
+    const resAuth = yield call(saveCourse, course.course)
+    yield put(setOneCourse(resAuth))
+    console.log('Final Res: ', resAuth)
+    // yield put(loadCourses())
+}
+
+export function* addOneCoursesUtil(course) {
+    console.log('course2: ', course)
+    alert('Saga2: add course')
+    const resAuth = yield call(saveCourse, course.course)
+    yield put(setOneCourse(resAuth))
+    console.log('Final Res: ', resAuth)
+    // yield put(loadCourses())
 }
 
 function* deleteCourseSaga(id) {

@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
 
 import { saveCourse } from "../../api/courseApi";
-import { fetchCourses, addOneCourses } from "../../thunks/courses";
-import { fetchAuthors } from "../../thunks/authors";
+import { addOneCourses } from "../../sagas/coursesSaga";
+import { loadAuthors, setOneCourse, setOneCourseUtil } from "../../actions/courses";
 
 class CourseForm extends Component {
     
@@ -19,19 +19,15 @@ class CourseForm extends Component {
             done: false
         }
     }
-    
+
     componentDidMount(){
-        this.props.fetchAuthors()
+        this.props.loadAuthors()
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
-    }
-
-    createCourseSlug(course_name) {
-        return course_name.split(" ").join("-")
     }
 
     handleCourseSubmit = (e) => {
@@ -45,7 +41,7 @@ class CourseForm extends Component {
                     this.props.currentCourse.title = title;
                     this.props.currentCourse.category = category;
                     this.props.currentCourse.authorId = authorId;
-                    saveCourse(this.props.currentCourse)
+                    this.props.setOneCourseUtil(this.props.currentCourse)
                 } else {
                     alert('Add course')
                     const course =  {
@@ -54,7 +50,7 @@ class CourseForm extends Component {
                         category
                     }
                     console.log(course)
-                    this.props.addOneCourses(course)
+                    this.props.setOneCourseUtil(course)
                 }
                 
             this.props.history.push('/courses')
@@ -113,7 +109,7 @@ class CourseForm extends Component {
 
 
 function mapStateToProps(state, props) {
-    if (props.match.params.id != "undefined") {
+    if (props.match.params.id !== "undefined") {
 
         const id = props.match.params.id;
         const currentCourse = state.courses.find(function(element) {
@@ -133,4 +129,10 @@ function mapStateToProps(state, props) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors, saveCourse })(CourseForm);
+const mapDispatchToProps = (dispatch) => ({
+    loadAuthors: () => dispatch(loadAuthors()),
+    setOneCourseUtil: (course) => dispatch(setOneCourseUtil(course)),
+    setOneCourse: (course) => dispatch(setOneCourse(course))
+  })
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseForm);
