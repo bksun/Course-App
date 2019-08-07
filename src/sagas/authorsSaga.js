@@ -11,7 +11,6 @@ function* watchAuthorsLoad() {
 
 function* handleFetchAuthors() {
     const resAuthors = yield call(getAuthors)
-    console.log('response authors:', resAuthors)
     yield put(setAuthors(resAuthors))
 }
 

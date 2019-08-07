@@ -43,13 +43,11 @@ class CourseForm extends Component {
                     this.props.currentCourse.authorId = authorId;
                     this.props.setOneCourseUtil(this.props.currentCourse)
                 } else {
-                    alert('Add course')
                     const course =  {
                         title,
                         authorId,
                         category
                     }
-                    console.log(course)
                     this.props.setOneCourseUtil(course)
                 }
                 

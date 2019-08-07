@@ -37,8 +37,9 @@ li #author {
 }
 
 #course-list ul .title-header {
-    margin-left: 13%;
+    margin-left: 52%;
     border-radius: 5px;
+    border-radius: 16px;
     color: black;
     background: yellowgreen;
 }

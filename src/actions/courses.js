@@ -15,8 +15,6 @@ const setOneCourse = (course) => {
 }
 
 const setOneCourseUtil = (course) => {
-    alert('Course Util set one course action')
-    console.log("course-action: ", course)
     return {
     type: COURSE.ADD_COURSE_UTIL,
     course
@@ -25,6 +23,11 @@ const setOneCourseUtil = (course) => {
 
 const deleteOneCourse = (courseId) => ({
     type: COURSE.COURSE_DELETE,
+    courseId
+})
+
+const deleteOneCourseUtil = (courseId) => ({
+    type: COURSE.COURSE_DELETE_UTIL,
     courseId
 })
 
@@ -55,5 +58,6 @@ export {
     deleteOneCourse,
     setAuthors,
     loadAuthors,
-    setOneCourseUtil
+    setOneCourseUtil,
+    deleteOneCourseUtil
 }

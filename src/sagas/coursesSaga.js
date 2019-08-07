@@ -12,7 +12,8 @@ function* watchCoursesLoad() {
     yield takeEvery(COURSE.LOAD_SUCCESS, getCourses)
     // yield takeEvery(COURSE.ADD_COURSE, addOneCourses)
     yield takeEvery(COURSE.ADD_COURSE_UTIL, addOneCoursesUtil)
-    yield takeEvery(COURSE.COURSE_DELETE, deleteCourseSaga)
+    yield takeEvery(COURSE.COURSE_DELETE_UTIL, deleteCourseSaga)
+    // yield takeEvery(COURSE.COURSE_DELETE, deleteCourseSaga)
 }
 
 //worker saga
@@ -22,26 +23,18 @@ function* handleFetchCourses() {
 }
 
 export function* addOneCourses(course) {
-    console.log('course2: ', course)
-    alert('Saga2: add course')
     const resAuth = yield call(saveCourse, course.course)
     yield put(setOneCourse(resAuth))
-    console.log('Final Res: ', resAuth)
-    // yield put(loadCourses())
 }
 
 export function* addOneCoursesUtil(course) {
-    console.log('course2: ', course)
-    alert('Saga2: add course')
     const resAuth = yield call(saveCourse, course.course)
     yield put(setOneCourse(resAuth))
-    console.log('Final Res: ', resAuth)
-    // yield put(loadCourses())
 }
 
-function* deleteCourseSaga(id) {
-    deleteCourse(id)
-    yield put(deleteOneCourse(id))
+function* deleteCourseSaga(course) {
+    yield call(deleteCourse, course.courseId)
+    yield put(deleteOneCourse(course.courseId))
 }
 
 

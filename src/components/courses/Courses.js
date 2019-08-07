@@ -6,7 +6,7 @@ import { fetchAuthors } from "../../thunks/authors";
 // import { fetchCourses, addOneCourses, deleteCourseThunk } from "../../sagas/coursesSaga";
 import CourseList from "./Course-List";
 import { store } from "../../App";
-import { loadCourses } from "../../actions/courses";
+import { loadCourses, deleteOneCourseUtil } from "../../actions/courses";
 
 class Courses extends Component {
 
@@ -37,8 +37,9 @@ class Courses extends Component {
     }
 
     handleDeleteCourse = (id) => {
+      alert(`delete: ${id}`)
       try {
-        this.props.deleteCourseThunk(id)
+        this.props.deleteOneCourseUtil(id)
       } catch (error) {
         this.props.history.push("/courses")
       }
@@ -64,7 +65,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCourses: () => dispatch(loadCourses())
+  fetchCourses: () => dispatch(loadCourses()),
+  deleteOneCourseUtil: (id) => dispatch(deleteOneCourseUtil(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Courses);
