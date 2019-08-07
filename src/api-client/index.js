@@ -6,6 +6,8 @@ const fetchCourses = async () => {
     if (response.status >= 400) {
         throw new Error(data.errors)
     }
+    console.log('Fetched course from API:')
+    console.log(data)
     return data
 }
 

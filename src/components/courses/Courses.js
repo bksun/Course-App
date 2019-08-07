@@ -3,11 +3,21 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchAuthors } from "../../thunks/authors";
-import { fetchCourses, addOneCourses, deleteCourseThunk } from "../../thunks/courses";
+// import { fetchCourses, addOneCourses, deleteCourseThunk } from "../../sagas/coursesSaga";
 import CourseList from "./Course-List";
 import { store } from "../../App";
+import { loadCourses } from "../../actions/courses";
 
 class Courses extends Component {
+
+  static propTypes = {
+    // courses: PropTypes.array.isRequired,
+    // currentCourse: PropTypes.any.isRequired,
+    // fetchCourses: PropTypes.func.isRequired,
+    // fetchAuthors: PropTypes.func.isRequired,
+    // addOneCourses: PropTypes.func.isRequired
+  }
+
     constructor(props) {
         super(props);
         this.CourseFormRef = React.createRef()
@@ -16,7 +26,6 @@ class Courses extends Component {
 
   componentDidMount(){
     this.props.fetchCourses()
-    this.props.fetchAuthors()
   }
 
     createCourseSlug(course_name) {
@@ -25,16 +34,6 @@ class Courses extends Component {
 
     handleCourseSubmit(e) {
       e.preventDefault()
-      const course_name = e.target["inputCourse"].value; //e.target.inputCourse.value;
-      const course =  {
-        id: 100 + this.props.courses.length,
-        title: course_name,
-        slug: this.createCourseSlug(course_name),
-        authorId: 1,
-        category: 'JavaScript'
-      }
-      this.props.addOneCourses(course)
-      this.CourseFormRef.current.resetForm()
     }
 
     handleDeleteCourse = (id) => {
@@ -55,13 +54,6 @@ class Courses extends Component {
     }
 }
 
-Courses.propTypes = {
-  courses: PropTypes.array.isRequired,
-  currentCourse: PropTypes.any.isRequired,
-  fetchCourses: PropTypes.func.isRequired,
-  fetchAuthors: PropTypes.func.isRequired,
-  addOneCourses: PropTypes.func.isRequired
-}
 
 function mapStateToProps(state) {
   return {
@@ -71,4 +63,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchCourses, addOneCourses, fetchAuthors, deleteCourseThunk })(Courses);
+const mapDispatchToProps = dispatch => ({
+  fetchCourses: () => dispatch(loadCourses())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);

@@ -21,7 +21,6 @@ const deleteOneCourse = (courseId) => ({
     courseId
 })
 
-
 const setError = (error) => ({
     type: COURSE.LOAD_FAIL,
     error
